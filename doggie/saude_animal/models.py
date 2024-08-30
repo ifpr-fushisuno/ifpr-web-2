@@ -5,26 +5,26 @@ class Dono(models.Model):
   email = models.CharField(max_length=100),
   senha = models.CharField(max_length=100),
   telefone = models.CharField(max_length=20),
+  # Após a realizaçaõ da atividade, transformar o endereço em uma classe
   endereco = models.CharField(max_length=255)
 
 class Animal(models.Model):
   nome = models.CharField(max_length=100),
   raca = models.CharField(max_length=50),
   idade = models.PositiveIntegerField(),
-  informacoes_de_saude = models.TextField(),
-  id_usuario = models.ForeignKey(Dono, on_delete=models.CASCADE)
+  id_dono = models.ForeignKey(Dono, on_delete=models.CASCADE)
 
 class Prontuario(models.Model):
-  doencas_cronicas = models.TextField(),
+  observacao = models.TextField(),
   vacinas = models.TextField(),
   medicamentos = models.TextField(),
-  exames = models.TextField(),
-  consultas = models.TextField(),
+  exames = models.ForeignKey(Exames, on_delete=models.CASCADE),
+  consultas = models.ForeignKey(Consultas, on_delete=models.CASCADE),
   id_animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
 
 class Veterinaria(models.Model):
   nome = models.CharField(100),
-  crmv = models.CharField(20),
+  #Criar classe Profissional com ENUM Especialidade
   especialidade = models.CharField(100),
   telefone = models.CharField(20),
   endereco = models.CharField(255)
@@ -47,7 +47,8 @@ class Exame(models.Model):
     resultado = models.CharField(max_length=200)
     id_animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     id_veterinaria = models.ForeignKey(Veterinaria, on_delete=models.CASCADE)
-    
+
+#Fazer a migraçao para consulta  
 class Monitoramento(models.Model):
     batimentos = models.IntegerField()
     temperatura = models.DecimalField(max_digits=5, decimal_places=2)
@@ -58,4 +59,4 @@ class Notificacao(models.Model):
     tipo = models.CharField(max_length=50)
     mensagem = models.CharField(max_length=200)
     data = models.DateField()
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE) 
+    id_dono = models.ForeignKey(Dono, on_delete=models.CASCADE) 
