@@ -22,6 +22,13 @@ class Prontuario(models.Model):
   consultas = models.TextField(),
   id_animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
 
+class Veterinaria(models.Model):
+  nome = models.CharField(100),
+  crmv = models.CharField(20),
+  especialidade = models.CharField(100),
+  telefone = models.CharField(20),
+  endereco = models.CharField(255)
+
 class Consulta(models.Model):
     data = models.DateField()
     descricao = models.CharField(max_length=200)
