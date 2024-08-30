@@ -1,5 +1,27 @@
 from django.db import models
 
+class Dono(models.Model):
+  nome = models.CharField(max_length=100),
+  email = models.CharField(max_length=100),
+  senha = models.CharField(max_length=100),
+  telefone = models.CharField(max_length=20),
+  endereco = models.CharField(max_length=255)
+
+class Animal(models.Model):
+  nome = models.CharField(max_length=100),
+  raca = models.CharField(max_length=50),
+  idade = models.PositiveIntegerField(),
+  informacoes_de_saude = models.TextField(),
+  id_usuario = models.ForeignKey(Dono, on_delete=models.CASCADE)
+
+class Prontuario(models.Model):
+  doencas_cronicas = models.TextField(),
+  vacinas = models.TextField(),
+  medicamentos = models.TextField(),
+  exames = models.TextField(),
+  consultas = models.TextField(),
+  id_animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
+
 class Documento(models.Model):
     tipo = models.CharField(max_length=50)
     arquivo = models.FileField(upload_to="arquivo")
