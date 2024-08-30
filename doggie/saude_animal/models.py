@@ -22,17 +22,24 @@ class Prontuario(models.Model):
   consultas = models.TextField(),
   id_animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
 
+class Consulta(models.Model):
+    data = models.DateField()
+    descricao = models.CharField(max_length=200)
+    resultado = models.CharField(max_length=200)
+    id_animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
+    id_veterinaria = models.ForeignKey(Veterinaria, on_delete=models.CASCADE)
+
 class Documento(models.Model):
     tipo = models.CharField(max_length=50)
     arquivo = models.FileField(upload_to="arquivo")
-    id_prontuario = models.ForeignKey(Prontuario, on_delete=CASCADE)
+    id_prontuario = models.ForeignKey(Prontuario, on_delete=models.CASCADE)
 
 class Exame(models.Model):
     tipo = models.CharField(max_length=50)
     data = models.DateField()
     resultado = models.CharField(max_length=200)
     id_animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
-    id_veterinaria = models.ForeignKey(Veterinaria, on_delete=CASCADE)
+    id_veterinaria = models.ForeignKey(Veterinaria, on_delete=models.CASCADE)
     
 class Monitoramento(models.Model):
     batimentos = models.IntegerField()
