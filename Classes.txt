@@ -1,0 +1,252 @@
+
+
+-- Tabela Usuário
+CREATE TABLE Usuario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    senha VARCHAR(255),
+    tipo ENUM('Administrador', 'Veterinário', 'Dono'),
+    data_criacao DATE,
+    ultimo_acesso DATE
+);
+
+-- Tabela Dono
+CREATE TABLE Dono (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    telefone VARCHAR(15),
+    email VARCHAR(100) UNIQUE,
+    cpf VARCHAR(11),
+    endereco_id INT,
+    FOREIGN KEY (endereco_id) REFERENCES Endereco(id)
+);
+
+-- Tabela Animal
+CREATE TABLE Animal (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    especie VARCHAR(100),
+    raca VARCHAR(100),
+    data_nascimento DATE,
+    sexo ENUM('Macho', 'Fêmea'),
+    peso DECIMAL(5, 2),
+    tutor_id INT,
+    FOREIGN KEY (tutor_id) REFERENCES Dono(id)
+);
+
+-- Tabela Endereco
+CREATE TABLE Endereco (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    logradouro VARCHAR(100),
+    numero VARCHAR(10),
+    complemento VARCHAR(50),
+    bairro VARCHAR(50),
+    cidade VARCHAR(50),
+    uf VARCHAR(2),
+    cep VARCHAR(8)
+);
+
+-- Tabela Especialidade
+CREATE TABLE Especialidade (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    descricao VARCHAR(255)
+);
+
+-- Tabela Veterinário
+CREATE TABLE Veterinario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    registro_crmv VARCHAR(20),
+    telefone VARCHAR(15),
+    email VARCHAR(100) UNIQUE,
+    especialidade_id INT,
+    FOREIGN KEY (especialidade_id) REFERENCES Especialidade(id)
+);
+
+-- Tabela Veterinária
+CREATE TABLE Veterinaria (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    telefone VARCHAR(15),
+    email VARCHAR(100) UNIQUE,
+    endereco_id INT,
+    FOREIGN KEY (endereco_id) REFERENCES Endereco(id)
+);
+
+-- Tabela Prontuário
+CREATE TABLE Prontuario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_id INT,
+    data_atualizacao DATE,
+    observacoes VARCHAR(255),
+    FOREIGN KEY (animal_id) REFERENCES Animal(id)
+);
+
+-- Tabela Registro de Saúde
+CREATE TABLE RegistroSaude (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    prontuario_id INT,
+    data_registro DATE,
+    descricao VARCHAR(255),
+    FOREIGN KEY (prontuario_id) REFERENCES Prontuario(id)
+);
+
+-- Tabela Vacina
+CREATE TABLE Vacina (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_id INT,
+    nome_vacina VARCHAR(100),
+    data_vacinacao DATE,
+    dose VARCHAR(50),
+    veterinario_id INT,
+    FOREIGN KEY (animal_id) REFERENCES Animal(id),
+    FOREIGN KEY (veterinario_id) REFERENCES Veterinario(id)
+);
+
+-- Tabela Exame
+CREATE TABLE Exame (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_id INT,
+    tipo_exame VARCHAR(100),
+    data_exame DATE,
+    resultado VARCHAR(255),
+    veterinario_id INT,
+    FOREIGN KEY (animal_id) REFERENCES Animal(id),
+    FOREIGN KEY (veterinario_id) REFERENCES Veterinario(id)
+);
+
+-- Tabela Alergia
+CREATE TABLE Alergia (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_id INT,
+    descricao VARCHAR(255),
+    data_diagnostico DATE,
+    veterinario_id INT,
+    FOREIGN KEY (animal_id) REFERENCES Animal(id),
+    FOREIGN KEY (veterinario_id) REFERENCES Veterinario(id)
+);
+
+-- Tabela Cirurgia
+CREATE TABLE Cirurgia (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_id INT,
+    tipo_cirurgia VARCHAR(100),
+    data_cirurgia DATE,
+    veterinario_id INT,
+    descricao VARCHAR(255),
+    resultado VARCHAR(255),
+    FOREIGN KEY (animal_id) REFERENCES Animal(id),
+    FOREIGN KEY (veterinario_id) REFERENCES Veterinario(id)
+);
+
+-- Tabela Documento
+CREATE TABLE Documento (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_id INT,
+    tipo_documento VARCHAR(100),
+    data_emissao DATE,
+    observacoes VARCHAR(255),
+    FOREIGN KEY (animal_id) REFERENCES Animal(id)
+);
+
+-- Tabela Atestado de Saúde Animal
+CREATE TABLE AtestadoSaudeAnimal (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_id INT,
+    data_emissao DATE,
+    condicao_saude VARCHAR(255),
+    observacoes VARCHAR(255),
+    veterinario_id INT,
+    FOREIGN KEY (animal_id) REFERENCES Animal(id),
+    FOREIGN KEY (veterinario_id) REFERENCES Veterinario(id)
+);
+
+-- Tabela Carteira de Vacinação
+CREATE TABLE CarteiraVacinacao (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_id INT,
+    data_emissao DATE,
+    vacinas VARCHAR(255),
+    observacoes VARCHAR(255),
+    FOREIGN KEY (animal_id) REFERENCES Animal(id)
+);
+
+-- Tabela Ficha Clínica
+CREATE TABLE FichaClinica (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_id INT,
+    tutor_id INT,
+    data_consulta DATE,
+    historico TEXT,
+    anamnese TEXT,
+    queixas_principais VARCHAR(255),
+    queixas_secundarias VARCHAR(255),
+    exame_fisico TEXT,
+    suspeita_clinica VARCHAR(255),
+    diagnostico_diferencial VARCHAR(255),
+    exames_complementares TEXT,
+    tratamento_prescrito TEXT,
+    evolucao TEXT,
+    veterinario_id INT,
+    FOREIGN KEY (animal_id) REFERENCES Animal(id),
+    FOREIGN KEY (tutor_id) REFERENCES Dono(id),
+    FOREIGN KEY (veterinario_id) REFERENCES Veterinario(id)
+);
+
+-- Tabela Receituário
+CREATE TABLE Receituario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_id INT,
+    tutor_id INT,
+    data_emissao DATE,
+    veterinario_id INT,
+    descricao_tratamento TEXT,
+    quantidade_prescrita VARCHAR(50),
+    via_administracao VARCHAR(50),
+    observacoes TEXT,
+    FOREIGN KEY (animal_id) REFERENCES Animal(id),
+    FOREIGN KEY (tutor_id) REFERENCES Dono(id),
+    FOREIGN KEY (veterinario_id) REFERENCES Veterinario(id)
+);
+
+-- Tabela Termo de Consentimento
+CREATE TABLE TermoConsentimento (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_id INT,
+    tutor_id INT,
+    data_emissao DATE,
+    procedimento_id INT,
+    observacoes VARCHAR(255),
+    veterinario_id INT,
+    FOREIGN KEY (animal_id) REFERENCES Animal(id),
+    FOREIGN KEY (tutor_id) REFERENCES Dono(id),
+    FOREIGN KEY (procedimento_id) REFERENCES Procedimento(id),
+    FOREIGN KEY (veterinario_id) REFERENCES Veterinario(id)
+);
+
+-- Tabela Atestado de Óbito
+CREATE TABLE AtestadoObito (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    animal_id INT,
+    tutor_id INT,
+    data_obito DATE,
+    hora_obito TIME,
+    provavel_causa_mortis VARCHAR(255),
+    idade INT,
+    orientacao_destinacao_corpo VARCHAR(255),
+    veterinario_id INT,
+    FOREIGN KEY (animal_id) REFERENCES Animal(id),
+    FOREIGN KEY (tutor_id) REFERENCES Dono(id),
+    FOREIGN KEY (veterinario_id) REFERENCES Veterinario(id)
+);
+
+-- Tabela Procedimento
+CREATE TABLE Procedimento (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    descricao VARCHAR(255),
+    custo DECIMAL(10, 2),
+    duracao_estimativa VARCHAR(50),
+    necessidade_anestesia BOOLEAN
+);
