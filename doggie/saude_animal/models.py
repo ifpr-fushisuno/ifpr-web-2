@@ -9,24 +9,6 @@ class TipoUsuario(models.TextChoices):
     DONO = 'Dono', 'Dono'
 
 
-class Usuario(models.Model):
-    nome = models.CharField(max_length=100)
-    email = models.EmailField(unique=True, validators=[EmailValidator()])
-    senha = models.CharField(max_length=128)  # Considere usar um método de hashing para armazenar senhas
-    tipo = models.CharField(max_length=20, choices=TipoUsuario.choices)
-    data_criacao = models.DateTimeField(auto_now_add=True)
-    ultimo_acesso = models.DateTimeField(auto_now=True)
-
-    def autenticar(self, senha_fornecida: str) -> bool:
-        return self.senha == senha_fornecida  # Use um método de hashing em produção
-
-    def tem_permissao(self, permissao: str) -> bool:
-        # Lógica para verificar permissões podem ser implementadas aqui.
-        pass
-
-    def __str__(self):
-        return self.nome
-
 
 class Endereco(models.Model):
     logradouro = models.CharField(max_length=255)
@@ -40,13 +22,30 @@ class Endereco(models.Model):
     def __str__(self):
         return f"{self.logradouro}, {self.numero} - {self.bairro}, {self.cidade}"
 
-
-class Dono(models.Model):
+class Usuario(models.Model):
     nome = models.CharField(max_length=100)
     telefone = models.CharField(max_length=15, validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$')])
     email = models.EmailField(unique=True, validators=[EmailValidator()])
-    cpf = models.CharField(max_length=11, validators=[RegexValidator(regex=r'^\d{11}$')])
+    senha = models.CharField(max_length=128) 
+    tipo = models.CharField(max_length=20, choices=TipoUsuario.choices)
+    data_criacao = models.DateTimeField(auto_now_add=True)
+    ultimo_acesso = models.DateTimeField(auto_now=True)
     endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE)
+
+    def autenticar(self, senha_fornecida: str) -> bool:
+        return self.senha == senha_fornecida  
+
+    def tem_permissao(self, permissao: str) -> bool:
+        # Lógica para verificar permissões podem ser implementadas aqui.
+        pass
+
+    def __str__(self):
+        return self.nome
+
+
+class Dono(models.Model):
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+    cpf = models.CharField(max_length=11)
 
     def __str__(self):
         return self.nome
@@ -83,18 +82,18 @@ class Veterinaria(models.Model):
     nome = models.CharField(max_length=100)
     telefone = models.CharField(max_length=15, validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$')])
     email = models.EmailField(unique=True, validators=[EmailValidator()])
-    especialidade = models.ForeignKey(Especialidade, on_delete=models.SET_NULL, null=True)
     endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE)
-
     def __str__(self):
         return self.nome
 
 class Veterinario(models.Model):
-    nome = models.CharField(max_length=100)
+    # Associando Veterinário ao Usuário
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='veterinarios')
     registro_crmv = models.CharField(max_length=20, unique=True)
-    telefone = models.CharField(max_length=15, validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$')])
-    email = models.EmailField(unique=True, validators=[EmailValidator()])
     especialidade = models.ForeignKey(Especialidade, on_delete=models.SET_NULL, null=True)
+    
+    # Associando Veterinário à Veterinária
+    veterinaria = models.ForeignKey(Veterinaria, on_delete=models.CASCADE, related_name='veterinarios')
 
     def __str__(self):
         return self.nome
