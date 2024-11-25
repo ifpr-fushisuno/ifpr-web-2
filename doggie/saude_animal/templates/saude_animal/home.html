@@ -1,0 +1,857 @@
+<html>
+
+<head>
+    <base href="https://www.petcare.vet/">
+    <title>PetCare - Cuidando com Carinho do Seu Pet</title>
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --secondary: #2196F3;
+            --accent: #FF9800;
+            --light: #f5f5f5;
+            --dark: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--light);
+        }
+
+        .footer {
+            background: #f8f9fa;
+            color: #666;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #555;
+            line-height: 1.6;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            fill: #666;
+        }
+
+        .social-icon:hover {
+            fill: var(--primary);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-input {
+            padding: 0.8rem;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            flex-grow: 1;
+            background: white;
+        }
+
+        .newsletter-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .newsletter-button:hover {
+            background: #3d8c40;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #eee;
+            color: #888;
+        }
+
+        header {
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo svg {
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover svg {
+            transform: rotate(10deg);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            margin-top: 80px;
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider {
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .benefits {
+            padding: 4rem 2rem;
+            background: var(--light);
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .benefit-card {
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            fill: var(--primary);
+        }
+
+        .benefit-title {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .benefit-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .testimonials {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .testimonial-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating-pets {
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .video-section {
+            padding: 4rem 2rem;
+            background: var(--light);
+            text-align: center;
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .play-button svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--primary);
+            margin-left: 5px;
+        }
+
+        .play-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: white;
+        }
+
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .community-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .community-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .community-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .community-icon {
+            width: 60px;
+            height: 60px;
+            fill: white;
+            transition: transform 0.3s ease;
+        }
+
+        .community-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .join-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .join-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-section {
+            padding: 4rem 2rem;
+            background: var(--light);
+        }
+
+        .blog-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-title {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+
+        .read-more:hover {
+            color: var(--secondary);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="https://www.petcare.vet" class="logo">
+                <svg style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M12,8L10.67,8.09C9.81,7.07 7.4,4.5 5,4.5C5,4.5 3.03,7.46 4.96,11.41C4.41,12.24 4.07,12.67 4,13.66L2.07,13.95L2.28,14.93L4.04,14.67L4.18,15.38L2.61,16.32L3.08,17.21L4.53,16.32C5.68,18.76 8.59,20 12,20C15.41,20 18.32,18.76 19.47,16.32L20.92,17.21L21.39,16.32L19.82,15.38L19.96,14.67L21.72,14.93L21.93,13.95L20,13.66C19.93,12.67 19.59,12.24 19.04,11.41C20.97,7.46 19,4.5 19,4.5C16.6,4.5 14.19,7.07 13.33,8.09L12,8M9,11A1,1 0 0,1 10,12A1,1 0 0,1 9,13A1,1 0 0,1 8,12A1,1 0 0,1 9,11M15,11A1,1 0 0,1 16,12A1,1 0 0,1 15,13A1,1 0 0,1 14,12A1,1 0 0,1 15,11M11,14H13L12,15.5L11,14Z" />
+                </svg>
+                PetCare
+            </a>
+            <nav class="nav-menu">
+                <a href="https://www.petcare.vet/meu-animal">Meu Animal</a>
+                <a href="https://www.petcare.vet/agenda">Agenda</a>
+                <a href="https://www.petcare.vet/documentos">Documentos</a>
+                <a href="https://www.petcare.vet/dicas">Dicas de Cuidado</a>
+                <a href="https://www.petcare.vet/suporte">Suporte</a>
+                <a href="https://www.petcare.vet/login">Cadastro</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="slider">
+            <div class="slide active"
+                style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=80')">
+                <div class="slide-content">
+                    <h1>Cuidando com Carinho do Seu Pet</h1>
+                    <p>Facilitamos o acompanhamento da saúde do seu melhor amigo</p>
+                    <a href="https://www.petcare.vet/cadastro" class="cta-button">Comece Agora</a>
+                </div>
+            </div>
+            <div class="slide"
+                style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1200&q=80')">
+                <div class="slide-content">
+                    <h1>Seu Pet Merece o Melhor</h1>
+                    <p>Acompanhamento veterinário simplificado e eficiente</p>
+                    <a href="https://www.petcare.vet/cadastro" class="cta-button">Comece Agora</a>
+                </div>
+            </div>
+            <div class="slide"
+                style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1546527868-ccb7ee7dfa6a?auto=format&fit=crop&w=1200&q=80')">
+                <div class="slide-content">
+                    <h1>Tecnologia a Favor do Bem-Estar</h1>
+                    <p>Todas as informações do seu pet em um só lugar</p>
+                    <a href="https://www.petcare.vet/cadastro" class="cta-button">Comece Agora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Por que escolher o PetCare?</h2>
+        <div class="benefits-container">
+            <div class="benefit-card">
+                <svg class="benefit-icon" viewBox="0 0 24 24">
+                    <path
+                        d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,5V19H5V5H19M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9" />
+                </svg>
+                <h3 class="benefit-title">Organização Simples</h3>
+                <p class="benefit-description">Mantenha todos os registros de saúde do seu animal em um só lugar.</p>
+            </div>
+
+            <div class="benefit-card">
+                <svg class="benefit-icon" viewBox="0 0 24 24">
+                    <path
+                        d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M16.2,16.2L11,13V7H12.5V12.2L17,14.9L16.2,16.2Z" />
+                </svg>
+                <h3 class="benefit-title">Alertas Personalizados</h3>
+                <p class="benefit-description">Receba lembretes sobre consultas e vacinas na hora certa.</p>
+            </div>
+
+            <div class="benefit-card">
+                <svg class="benefit-icon" viewBox="0 0 24 24">
+                    <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z" />
+                </svg>
+                <h3 class="benefit-title">Acesso a Dicas Especiais</h3>
+                <p class="benefit-description">Dicas de cuidado e bem-estar sempre à mão.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 style="text-align: center; margin-bottom: 2rem;">O que nossos clientes dizem</h2>
+        <div class="testimonial-container">
+            <div class="testimonial-card">
+                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Foto de perfil de Ana Silva"
+                    class="user-avatar">
+                <h3>Ana Silva</h3>
+                <p>"O PetCare mudou completamente como cuido da saúde do meu cachorro. Agora tenho tudo organizado em um
+                    só lugar!"</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Foto de perfil de Carlos Santos"
+                    class="user-avatar">
+                <h3>Carlos Santos</h3>
+                <p>"Interface super intuitiva e atendimento excepcional. Recomendo para todos os donos de pets!"</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Foto de perfil de Maria Oliveira"
+                    class="user-avatar">
+                <h3>Maria Oliveira</h3>
+                <p>"As dicas de cuidado são fantásticas! Aprendi muito sobre como cuidar melhor dos meus gatos."</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-section">
+        <h2>Como Funciona o PetCare?</h2>
+        <p>Assista nosso vídeo tutorial e descubra como é fácil cuidar do seu pet com nossa plataforma</p>
+
+        <div class="video-container">
+            <img src="https://images.unsplash.com/photo-1601758177266-bc599de87707?auto=format&fit=crop&w=800&h=450&q=80"
+                alt="Thumbnail do vídeo tutorial do PetCare" class="video-thumbnail">
+            <div class="play-button">
+                <svg viewBox="0 0 24 24">
+                    <path d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <div class="video-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <iframe width="100%" height="562" src="" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <section class="blog-section">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Dicas e Novidades</h2>
+        <div class="blog-grid">
+            <article class="blog-card">
+                <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=600&q=80"
+                    alt="Cachorro sendo examinado por veterinário" class="blog-image">
+                <div class="blog-content">
+                    <div class="blog-date">15 de Maio, 2024</div>
+                    <h3 class="blog-title">Como Preparar seu Pet para uma Consulta Veterinária</h3>
+                    <p class="blog-excerpt">Descubra as melhores práticas para tornar as visitas ao veterinário mais
+                        tranquilas para seu animal de estimação.</p>
+                    <a href="https://www.petcare.vet/blog/preparo-consulta" class="read-more">Leia mais →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=600&q=80"
+                    alt="Gato deitado em almofada" class="blog-image">
+                <div class="blog-content">
+                    <div class="blog-date">12 de Maio, 2024</div>
+                    <h3 class="blog-title">Guia de Nutrição: Alimentação Saudável para Gatos</h3>
+                    <p class="blog-excerpt">Aprenda sobre as necessidades nutricionais específicas dos felinos e como
+                        escolher a melhor alimentação.</p>
+                    <a href="https://www.petcare.vet/blog/nutricao-gatos" class="read-more">Leia mais →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <img src="https://plus.unsplash.com/premium_photo-1664126702560-e32899cb98b3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Cachorro brincando no parque" class="blog-image">
+                <div class="blog-content">
+                    <div class="blog-date">10 de Maio, 2024</div>
+                    <h3 class="blog-title">5 Exercícios Essenciais para Cães</h3>
+                    <p class="blog-excerpt">Conheça as atividades físicas ideais para manter seu cachorro saudável e
+                        feliz.</p>
+                    <a href="https://www.petcare.vet/blog/exercicios-caes" class="read-more">Leia mais →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="community-section">
+        <div class="community-container">
+            <h2>Junte-se à Nossa Comunidade</h2>
+            <p>Compartilhe experiências, dicas e histórias com outros amantes de pets como você!</p>
+
+            <div class="community-icons">
+                <svg class="community-icon" viewBox="0 0 24 24">
+                    <path
+                        d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z" />
+                </svg>
+
+                <svg class="community-icon" viewBox="0 0 24 24">
+                    <path
+                        d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M6,9H18V11H6M14,14H6V12H14M18,8H6V6H18" />
+                </svg>
+
+                <svg class="community-icon" viewBox="0 0 24 24">
+                    <path
+                        d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+                </svg>
+            </div>
+
+            <p>Junte-se a milhares de donos de pets que já fazem parte da nossa comunidade!</p>
+            <a href="https://www.petcare.vet/comunidade" class="join-button">Participe Agora!</a>
+        </div>
+    </section>
+
+    <script>
+        const slides = [
+            {
+                image: 'https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1200&q=80',
+                title: 'Cuidando com Carinho do Seu Pet',
+                description: 'Facilitamos o acompanhamento da saúde do seu melhor amigo'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1200&q=80',
+                title: 'Seu Pet Merece o Melhor',
+                description: 'Acompanhamento veterinário simplificado e eficiente'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1546527868-ccb7ee7dfa6a?auto=format&fit=crop&w=1200&q=80',
+                title: 'Tecnologia a Favor do Bem-Estar',
+                description: 'Todas as informações do seu pet em um só lugar'
+            }
+        ];
+
+        let currentSlide = 0;
+        const slider = document.querySelector('.slider');
+
+        // Criar slides iniciais
+        slides.forEach((slide, index) => {
+            const div = document.createElement('div');
+            div.className = `slide ${index === 0 ? 'active' : ''}`;
+            div.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${slide.image}')`;
+
+            div.innerHTML = `
+        <div class="slide-content">
+          <h1>${slide.title}</h1>
+          <p>${slide.description}</p>
+          <a href="https://www.petcare.vet/cadastro" class="cta-button">Comece Agora</a>
+        </div>
+      `;
+
+            slider.appendChild(div);
+        });
+
+        // Função para trocar slides
+        function nextSlide() {
+            const slides = document.querySelectorAll('.slide');
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Trocar slides automaticamente a cada 5 segundos
+        setInterval(nextSlide, 5000);
+
+        // Video Modal Functionality
+        const videoContainer = document.querySelector('.video-container');
+        const videoModal = document.querySelector('.video-modal');
+        const closeModal = document.querySelector('.close-modal');
+        const videoIframe = document.querySelector('.video-modal iframe');
+        const videoUrl = "https://www.youtube.com/embed/YOUR_VIDEO_ID"; // Replace with actual video ID
+
+        videoContainer.addEventListener('click', () => {
+            videoModal.classList.add('active');
+            videoIframe.src = videoUrl;
+        });
+
+        closeModal.addEventListener('click', () => {
+            videoModal.classList.remove('active');
+            videoIframe.src = '';
+        });
+
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                videoModal.classList.remove('active');
+                videoIframe.src = '';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                videoModal.classList.remove('active');
+                videoIframe.src = '';
+            }
+        });
+
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            // Here you would typically send the email to your backend
+            alert('Obrigado por se inscrever! Em breve você receberá nossas novidades.');
+            event.target.reset();
+            return false;
+        }
+    </script>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p>📞 0800 123 4567</p>
+                <p>📧 contato@petcare.vet</p>
+                <p>🏢 Av. Principal, 1000 - São Paulo, SP</p>
+                <div class="social-links">
+                    <a href="https://facebook.com/petcare" aria-label="Facebook">
+                        <svg class="social-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com/petcare" aria-label="Instagram">
+                        <svg class="social-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" />
+                        </svg>
+                    </a>
+                    <a href="https://youtube.com/petcare" aria-label="YouTube">
+                        <svg class="social-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Links Úteis</h3>
+                <a href="https://www.petcare.vet/termos">Termos de Uso</a>
+                <a href="https://www.petcare.vet/privacidade">Política de Privacidade</a>
+                <a href="https://www.petcare.vet/faq">FAQ</a>
+                <a href="https://www.petcare.vet/sobre">Sobre Nós</a>
+                <a href="https://www.petcare.vet/blog">Blog</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Receba dicas e novidades sobre cuidados com pets!</p>
+                <form class="newsletter-form" onsubmit="return subscribeNewsletter(event)">
+                    <input type="email" class="newsletter-input" placeholder="Seu melhor e-mail" required>
+                    <button type="submit" class="newsletter-button">
+                        Inscrever
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 PetCare. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

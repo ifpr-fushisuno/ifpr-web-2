@@ -8,6 +8,9 @@ from django.shortcuts import get_object_or_404
 from .models import *
 from .serializers import *
 
+from django.shortcuts import render
+
+
 
 # Views para Usuario
 class UsuarioView(APIView):
@@ -893,3 +896,7 @@ class ProcedimentoView(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Procedimento.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+        
+def homePage(request):
+    return render(request, "saude_animal/home.html")
