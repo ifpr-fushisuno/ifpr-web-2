@@ -5,8 +5,8 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 
 #Importando models e serializers necessarios
-from .models import Dono, Veterinaria
-from .serializers import DonoSerializer, VeterinariaSerializer
+from .models import *
+from .serializers import *
 
 #Criando a classe da view
 class DonoView(APIView):
