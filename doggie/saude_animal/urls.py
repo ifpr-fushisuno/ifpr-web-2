@@ -93,4 +93,7 @@ urlpatterns = [
 
     # URL para Autenticação
     path('auth/', obtain_auth_token, name='api_token_auth'),
+
+    path('register/', UserRegisterAPIView.as_view(), name='user-register'),
+
 ]
