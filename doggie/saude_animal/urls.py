@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from .views import *
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
 
@@ -89,4 +90,7 @@ urlpatterns = [
     # URLs para Procedimento
     path('procedimentos/', ProcedimentoView.as_view(), name='procedimentos-list'),
     path('procedimentos/<int:pk>/', ProcedimentoView.as_view(), name='procedimento-detail'),
+
+    # URL para Autenticação
+    path('auth/', obtain_auth_token, name='api_token_auth'),
 ]
