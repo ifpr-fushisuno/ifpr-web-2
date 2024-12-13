@@ -14,6 +14,7 @@ from .serializers import *
 from django.shortcuts import render
 
 class UserRegisterAPIView(APIView):
+    permission_classes = [AllowAny] # Permite acesso público a este endpoint
     def post(self, request, *args, **kwargs):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
